@@ -1,3 +1,5 @@
+// middlewares/: Middleware functions for request processing.
+
 const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {

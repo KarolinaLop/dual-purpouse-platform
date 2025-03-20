@@ -1,3 +1,5 @@
+// utils/: Utility functions.
+
 const startVPNService = () => {
     // Implement VPN start logic here
 };

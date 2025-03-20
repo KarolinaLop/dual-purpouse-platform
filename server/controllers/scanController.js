@@ -1,3 +1,5 @@
+// controllers/: Logic for handling scan requests and responses.
+
 const { executeScan, fetchScanResults } = require('../utils/scanUtils');
 
 const runScan = (req, res) => {

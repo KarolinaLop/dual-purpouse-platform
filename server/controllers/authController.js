@@ -1,3 +1,5 @@
+// controllers/: Logic for handling auth requests and responses.
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
