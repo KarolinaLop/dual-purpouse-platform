@@ -1,19 +1,31 @@
-const { executeScan, fetchScanResults } = require('../utils/scanUtils');
+// controllers/: Logic for handling scan requests and responses.
+
+const { executeOpenVASScan, executeZenmapScan } = require('../utils/scanUtils');
+const Scan = require('../models/scan');
 
 const runScan = (req, res) => {
-    const { scanType } = req.body;
-    try {
-        executeScan(scanType);
-        res.send('Scan started');
-    } catch (error) {
-        res.status(500).send('Error starting scan');
-    }
+    const { target, scanType } = req.body;
+    const scanFunction = scanType === 'OpenVAS' ? executeOpenVASScan : executeZenmapScan;
+
+    scanFunction(target, async (error, result) => {
+        if (error) {
+            return res.status(500).send('Error executing scan');
+        }
+
+        try {
+            const scan = new Scan({ target, scanType, result });
+            await scan.save();
+            res.send('Scan completed and results saved');
+        } catch (saveError) {
+            res.status(500).send('Error saving scan results');
+        }
+    });
 };
 
-const getScanResults = (req, res) => {
+const getScanResults = async (req, res) => {
     try {
-        const results = fetchScanResults();
-        res.json(results);
+        const scans = await Scan.find();
+        res.json(scans);
     } catch (error) {
         res.status(500).send('Error fetching scan results');
     }
