@@ -1,3 +1,5 @@
+// routes/: Route definitions.
+
 const express = require('express');
 const { startVPN, stopVPN, chooseProtocol } = require('../controllers/vpnController');
 const authMiddleware = require('../middlewares/authMiddleware');
