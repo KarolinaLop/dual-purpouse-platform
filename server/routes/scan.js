@@ -1,3 +1,5 @@
+// routes/: Route definitions.
+
 const express = require('express');
 const { runScan, getScanResults } = require('../controllers/scanController');
 const authMiddleware = require('../middlewares/authMiddleware');
