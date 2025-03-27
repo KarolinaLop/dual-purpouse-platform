@@ -1,6 +1,6 @@
 // controllers/: Logic for handling VPN requests and responses.
 
-const { startVPNService, stopVPNService, restartVPNService, setVPNProtocol } = require('../utils/vpnUtils');
+const { startVPNService, stopVPNService, restartVPNService, setVPNProtocol } = require('../utils/vpnServiceUtils');
 
 const startVPN = (req, res) => {
     try {

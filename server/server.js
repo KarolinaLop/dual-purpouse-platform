@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const vpnRoutes = require('./routes/vpn');
-const scanRoutes = require('./routes/scan');
+const scanRoutes = require('./routes/scanRoutes'); // Updated import
 
 dotenv.config();
 
@@ -19,9 +19,13 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 app.use(express.json());
 
+console.log('authRoutes:', authRoutes);
+console.log('vpnRoutes:', vpnRoutes);
+console.log('scanRoutes:', scanRoutes);
+
 app.use('/api/auth', authRoutes);
 app.use('/api/vpn', vpnRoutes);
-app.use('/api/scan', scanRoutes);
+app.use('/api/scan', scanRoutes); // Updated route
 
 // Add a simple route for /api
 app.get('/api', (req, res) => {
